@@ -1,30 +1,20 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-import time
+import undetected_chromedriver as uc
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# ChromeDriverのパス（あなたの環境に合わせて）
-CHROMEDRIVER_PATH = "C:/Users/User/Desktop/chromedriver.exe"
-
-# サービスオブジェクトを使う（Selenium 4対応）
-service = Service(executable_path=CHROMEDRIVER_PATH)
-
-# ヘッドレスオプション（ブラウザを表示しない）
-options = Options()
-options.add_argument("--headless")
+# Chromeオプション設定
+options = uc.ChromeOptions()
+options.add_argument("--headless")  # ブラウザ非表示
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-# ドライバ起動（新しい書き方）
-driver = webdriver.Chrome(service=service, options=options)
+# ドライバ起動（クラウド環境で自動的にChromeDriverを使う）
+driver = uc.Chrome(options=options)
 
 # アクセスするページ
 url = "https://dshinsei.e-kanagawa.lg.jp/140007-u/offer/offerList_movePage?pageNo=3"
 driver.get(url)
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # 「予約可能な枠」が存在するか確認
 try:
