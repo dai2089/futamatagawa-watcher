@@ -1,15 +1,16 @@
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-# Chromeオプション設定
 options = uc.ChromeOptions()
-options.add_argument("--headless")  # ブラウザ非表示
+options.add_argument("--headless")  # 非表示モード
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-# ドライバ起動（クラウド環境で自動的にChromeDriverを使う）
+# ここで ChromeDriverのパスをRender環境に合わせて変更
 driver = uc.Chrome(options=options)
 
 # アクセスするページ
