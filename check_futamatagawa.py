@@ -2,15 +2,15 @@ import undetected_chromedriver as uc
 from selenium.webdriver.chrome.options import Options
 
 options = uc.ChromeOptions()
-options.add_argument("--headless")  # 非表示モード
+options.add_argument("--headless")  # ヘッドレスモード
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-# Renderの環境では、バイナリ（実行ファイル）の場所を指定する必要があります
-options.binary_location = "/usr/bin/chromium"  # Render環境のデフォルトパス
+# Renderの環境では、Chromeのバイナリの場所を指定
+options.binary_location = "/usr/bin/chromium"  # Renderのデフォルトのパス
 
-# ドライバ起動
-driver = uc.Chrome(options=options)
+# ChromeDriverを起動
+driver = uc.Chrome(options=options, browser_executable_path="/usr/bin/chromium")
 
 # アクセスするページ
 url = "https://dshinsei.e-kanagawa.lg.jp/140007-u/offer/offerList_movePage?pageNo=3"
