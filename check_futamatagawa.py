@@ -1,16 +1,15 @@
 import undetected_chromedriver.v2 as uc
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 options = uc.ChromeOptions()
 options.add_argument("--headless")  # 非表示モード
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-# ここで ChromeDriverのパスをRender環境に合わせて変更
+# Renderの環境では、バイナリ（実行ファイル）の場所を指定する必要があります
+options.binary_location = "/usr/bin/chromium"  # Render環境のデフォルトパス
+
+# ドライバ起動
 driver = uc.Chrome(options=options)
 
 # アクセスするページ
@@ -18,6 +17,10 @@ url = "https://dshinsei.e-kanagawa.lg.jp/140007-u/offer/offerList_movePage?pageN
 driver.get(url)
 
 # 「予約可能な枠」が存在するか確認
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 try:
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//a[contains(@href, 'offerList_detailTop')]"))
