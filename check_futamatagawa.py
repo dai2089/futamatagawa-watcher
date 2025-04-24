@@ -6,10 +6,10 @@ options.add_argument("--headless")  # ヘッドレスモード
 options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
-# Renderの環境では、Chromeのバイナリの場所を指定
-options.binary_location = "/usr/bin/chromium-browser"  # 正しいパスを指定
+# Render環境では、Chromeのバイナリパスを指定
+options.binary_location = "/usr/bin/chromium-browser"  # Renderのデフォルトパス
 
-# ここでdriverを指定（`browser_executable_path` を省略してみる）
+# ドライバ起動時にbrowser_executable_pathは省略してみる
 driver = uc.Chrome(options=options)
 
 # アクセスするページ
